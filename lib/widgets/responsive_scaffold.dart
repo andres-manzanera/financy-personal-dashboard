@@ -51,34 +51,39 @@ class _MobileLayout extends StatelessWidget {
     final isDark = context.watch<ThemeProvider>().isDarkMode;
 
     return Scaffold(
+      extendBody: true,
       body: IndexedStack(
         index: navProvider.currentIndex,
         children: screens,
       ),
-      bottomNavigationBar: Container(
-        decoration: BoxDecoration(
-          color: AppColors.surface(isDark),
-          boxShadow: [
-            BoxShadow(
-              color: Colors.black.withOpacity(0.08),
-              blurRadius: 16,
-              offset: const Offset(0, -4),
+      bottomNavigationBar: SafeArea(
+        child: Padding(
+          padding: const EdgeInsets.fromLTRB(AppSpacing.md, 0, AppSpacing.md, AppSpacing.md),
+          child: Container(
+            decoration: BoxDecoration(
+              color: AppColors.surface(isDark),
+              borderRadius: BorderRadius.circular(AppSpacing.radiusXl),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.black.withOpacity(0.12),
+                  blurRadius: 24,
+                  offset: const Offset(0, 8),
+                ),
+              ],
             ),
-          ],
-        ),
-        child: SafeArea(
-          child: Padding(
-            padding: const EdgeInsets.symmetric(
-                horizontal: AppSpacing.sm, vertical: AppSpacing.sm),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: List.generate(
-                ResponsiveScaffold._navItems.length,
-                (i) => _MobileNavItem(
-                  item: ResponsiveScaffold._navItems[i],
-                  isSelected: navProvider.currentIndex == i,
-                  onTap: () => navProvider.setIndex(i),
-                  isDark: isDark,
+            child: Padding(
+              padding: const EdgeInsets.symmetric(
+                  horizontal: AppSpacing.sm, vertical: AppSpacing.xs),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: List.generate(
+                  ResponsiveScaffold._navItems.length,
+                  (i) => _MobileNavItem(
+                    item: ResponsiveScaffold._navItems[i],
+                    isSelected: navProvider.currentIndex == i,
+                    onTap: () => navProvider.setIndex(i),
+                    isDark: isDark,
+                  ),
                 ),
               ),
             ),
