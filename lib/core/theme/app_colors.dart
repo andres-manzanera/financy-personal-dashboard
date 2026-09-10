@@ -4,7 +4,7 @@ class AppColors {
   AppColors._();
 
   // ─── Light Mode ───
-  static const Color lightBackground = Color(0xFFE4E5E2);
+  static const Color lightBackground = Color(0xFFF2F3F4);
   static const Color lightSurface = Color(0xFFFFFFFF);
   static const Color lightSurfaceVariant = Color(0xFFF5F1D0);
   static const Color lightCardBorder = Color(0xFFE8E4C8);
