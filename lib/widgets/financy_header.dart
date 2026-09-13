@@ -26,7 +26,7 @@ class FinancyHeader extends StatelessWidget {
           ),
         ],
       ),
-      margin: const EdgeInsets.symmetric(vertical: 12.0),
+      margin: const EdgeInsets.only(bottom: 12.0),
       padding: const EdgeInsets.symmetric(horizontal: AppSpacing.lg, vertical: 12.0),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
