@@ -8,6 +8,7 @@ import '../../core/utils/date_formatter.dart';
 import '../../data/mock/mock_data.dart';
 import '../../data/models/transaction_model.dart';
 import '../../providers/theme_provider.dart';
+import '../../widgets/financy_header.dart';
 
 class MovementsScreen extends StatefulWidget {
   const MovementsScreen({super.key});
@@ -76,45 +77,7 @@ class _MovementsScreenState extends State<MovementsScreen> {
       child: Column(
         children: [
           // ─── Header ───
-          Padding(
-            padding: const EdgeInsets.fromLTRB(
-                AppSpacing.lg, AppSpacing.lg, AppSpacing.lg, AppSpacing.sm),
-            child: Row(
-              children: [
-                Container(
-                  width: 40,
-                  height: 40,
-                  decoration: BoxDecoration(
-                    color: AppColors.primary,
-                    borderRadius: BorderRadius.circular(AppSpacing.radiusMd),
-                  ),
-                  child: const Icon(
-                    Icons.account_balance_wallet_rounded,
-                    color: Colors.white,
-                    size: 20,
-                  ),
-                ),
-                const SizedBox(width: AppSpacing.md),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      'Financy',
-                      style: AppTypography.titleLarge(
-                        color: AppColors.textPrimary(isDark),
-                      ),
-                    ),
-                    Text(
-                      'Movimientos',
-                      style: AppTypography.bodySmall(
-                        color: AppColors.textTertiary(isDark),
-                      ),
-                    ),
-                  ],
-                ),
-              ],
-            ),
-          ),
+          const FinancyHeader(subtitle: 'Movimientos'),
 
           // ─── Tab Toggle ───
           Padding(

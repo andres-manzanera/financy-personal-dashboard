@@ -7,6 +7,7 @@ import '../../core/utils/currency_formatter.dart';
 import '../../data/mock/mock_data.dart';
 import '../../data/models/savings_goal_model.dart';
 import '../../providers/theme_provider.dart';
+import '../../widgets/financy_header.dart';
 
 class SavingsScreen extends StatefulWidget {
   const SavingsScreen({super.key});
@@ -37,47 +38,8 @@ class _SavingsScreenState extends State<SavingsScreen> {
       child: CustomScrollView(
         slivers: [
           // ─── Header ───
-          SliverToBoxAdapter(
-            child: Padding(
-              padding: const EdgeInsets.fromLTRB(
-                  AppSpacing.lg, AppSpacing.lg, AppSpacing.lg, AppSpacing.sm),
-              child: Row(
-                children: [
-                  Container(
-                    width: 40,
-                    height: 40,
-                    decoration: BoxDecoration(
-                      color: AppColors.primary,
-                      borderRadius:
-                          BorderRadius.circular(AppSpacing.radiusMd),
-                    ),
-                    child: const Icon(
-                      Icons.account_balance_wallet_rounded,
-                      color: Colors.white,
-                      size: 20,
-                    ),
-                  ),
-                  const SizedBox(width: AppSpacing.md),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        'Financy ✦',
-                        style: AppTypography.titleLarge(
-                          color: AppColors.textPrimary(isDark),
-                        ),
-                      ),
-                      Text(
-                        'Metas de Ahorro',
-                        style: AppTypography.bodySmall(
-                          color: AppColors.textTertiary(isDark),
-                        ),
-                      ),
-                    ],
-                  ),
-                ],
-              ),
-            ),
+          const SliverToBoxAdapter(
+            child: FinancyHeader(subtitle: 'Metas de Ahorro'),
           ),
 
           // ─── Total Saved Card ───

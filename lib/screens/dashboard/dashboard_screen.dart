@@ -8,6 +8,7 @@ import '../../data/mock/mock_data.dart';
 import '../../data/models/transaction_model.dart';
 import '../../providers/theme_provider.dart';
 import '../../providers/navigation_provider.dart';
+import '../../widgets/financy_header.dart';
 
 class DashboardScreen extends StatelessWidget {
   const DashboardScreen({super.key});
@@ -15,88 +16,13 @@ class DashboardScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final isDark = context.watch<ThemeProvider>().isDarkMode;
-    final themeProvider = context.read<ThemeProvider>();
 
     return SafeArea(
       child: CustomScrollView(
         slivers: [
           // ─── Header ───
-          SliverToBoxAdapter(
-            child: Padding(
-              padding: const EdgeInsets.fromLTRB(
-                  AppSpacing.lg, AppSpacing.lg, AppSpacing.lg, AppSpacing.sm),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Row(
-                    children: [
-                      Container(
-                        width: 40,
-                        height: 40,
-                        decoration: BoxDecoration(
-                          color: AppColors.primary,
-                          borderRadius:
-                              BorderRadius.circular(AppSpacing.radiusMd),
-                        ),
-                        child: const Icon(
-                          Icons.account_balance_wallet_rounded,
-                          color: Colors.white,
-                          size: 20,
-                        ),
-                      ),
-                      const SizedBox(width: AppSpacing.md),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            'Financy',
-                            style: AppTypography.titleLarge(
-                              color: AppColors.textPrimary(isDark),
-                            ),
-                          ),
-                          Text(
-                            'Dashboard',
-                            style: AppTypography.bodySmall(
-                              color: AppColors.textTertiary(isDark),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
-                  Row(
-                    children: [
-                      // Only show theme toggle on mobile (desktop/tablet have it in sidebar)
-                      LayoutBuilder(
-                        builder: (context, constraints) {
-                          return IconButton(
-                            onPressed: themeProvider.toggleTheme,
-                            icon: Icon(
-                              isDark
-                                  ? Icons.light_mode_rounded
-                                  : Icons.dark_mode_rounded,
-                              color: AppColors.textSecondary(isDark),
-                              size: 22,
-                            ),
-                          );
-                        },
-                      ),
-                      const SizedBox(width: AppSpacing.xs),
-                      CircleAvatar(
-                        radius: 18,
-                        backgroundColor: AppColors.secondary,
-                        child: Text(
-                          'AM',
-                          style: AppTypography.labelMedium(
-                            color: AppColors.primary,
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ],
-              ),
-            ),
+          const SliverToBoxAdapter(
+            child: FinancyHeader(subtitle: 'Dashboard'),
           ),
 
           // ─── Greeting ───

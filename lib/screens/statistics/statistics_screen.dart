@@ -8,6 +8,7 @@ import '../../core/utils/currency_formatter.dart';
 import '../../data/mock/mock_data.dart';
 import '../../data/models/category_model.dart';
 import '../../providers/theme_provider.dart';
+import '../../widgets/financy_header.dart';
 
 class StatisticsScreen extends StatefulWidget {
   const StatisticsScreen({super.key});
@@ -27,68 +28,8 @@ class _StatisticsScreenState extends State<StatisticsScreen> {
       child: CustomScrollView(
         slivers: [
           // ─── Header ───
-          SliverToBoxAdapter(
-            child: Padding(
-              padding: const EdgeInsets.fromLTRB(
-                  AppSpacing.lg, AppSpacing.lg, AppSpacing.lg, AppSpacing.sm),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Row(
-                    children: [
-                      Container(
-                        width: 40,
-                        height: 40,
-                        decoration: BoxDecoration(
-                          color: AppColors.primary,
-                          borderRadius:
-                              BorderRadius.circular(AppSpacing.radiusMd),
-                        ),
-                        child: const Icon(
-                          Icons.account_balance_wallet_rounded,
-                          color: Colors.white,
-                          size: 20,
-                        ),
-                      ),
-                      const SizedBox(width: AppSpacing.md),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            'Financy',
-                            style: AppTypography.titleLarge(
-                              color: AppColors.textPrimary(isDark),
-                            ),
-                          ),
-                          Text(
-                            'Estadísticas',
-                            style: AppTypography.bodySmall(
-                              color: AppColors.textTertiary(isDark),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
-                  Row(
-                    children: [
-                      Icon(Icons.settings_rounded,
-                          color: AppColors.textSecondary(isDark), size: 22),
-                      const SizedBox(width: AppSpacing.md),
-                      CircleAvatar(
-                        radius: 18,
-                        backgroundColor: AppColors.secondary,
-                        child: Text(
-                          'AM',
-                          style: AppTypography.labelMedium(
-                              color: AppColors.primary),
-                        ),
-                      ),
-                    ],
-                  ),
-                ],
-              ),
-            ),
+          const SliverToBoxAdapter(
+            child: FinancyHeader(subtitle: 'Estadísticas'),
           ),
 
           // ─── Toggle Gastos / Ingresos ───
