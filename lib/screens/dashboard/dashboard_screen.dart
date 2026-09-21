@@ -216,21 +216,21 @@ class DashboardScreen extends StatelessWidget {
                       scrollDirection: Axis.horizontal,
                       children: [
                         _SavingsPreviewCard(
-                          icon: Icons.laptop_mac_rounded,
+                          icon: Icons.desktop_windows_rounded,
                           title: 'Mi PC Gamer',
-                          progress:
-                              '520 € / 1.100 €',
+                          progress: '520 € / 1.100 €',
                           percent: 47,
                           isDark: isDark,
+                          barColor: Colors.amber,
                         ),
                         const SizedBox(width: AppSpacing.md),
                         _SavingsPreviewCard(
-                          icon: Icons.build_rounded,
+                          icon: Icons.directions_car_rounded,
                           title: 'Reparación Coche',
-                          progress:
-                              '100 € / 2.320 €',
+                          progress: '100 € / 2.320 €',
                           percent: 4,
                           isDark: isDark,
+                          barColor: const Color(0xFF2E7D32),
                         ),
                       ],
                     ),
@@ -501,19 +501,18 @@ class _SummaryChip extends StatelessWidget {
     final color = isPositive ? AppColors.success : AppColors.error;
 
     return Container(
-      padding: const EdgeInsets.all(AppSpacing.md),
+      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 20),
       decoration: BoxDecoration(
         color: AppColors.surface(isDark),
-        borderRadius: BorderRadius.circular(AppSpacing.radiusLg),
-        border: Border.all(color: AppColors.cardBorder(isDark)),
+        borderRadius: BorderRadius.circular(24),
       ),
       child: Row(
         children: [
           Container(
-            width: 32,
-            height: 32,
+            width: 48,
+            height: 48,
             decoration: BoxDecoration(
-              color: color.withOpacity(0.12),
+              color: color.withOpacity(0.15),
               shape: BoxShape.circle,
             ),
             child: Icon(
@@ -521,10 +520,10 @@ class _SummaryChip extends StatelessWidget {
                   ? Icons.arrow_downward_rounded
                   : Icons.arrow_upward_rounded,
               color: color,
-              size: 16,
+              size: 24,
             ),
           ),
-          const SizedBox(width: AppSpacing.sm),
+          const SizedBox(width: 12),
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -532,12 +531,15 @@ class _SummaryChip extends StatelessWidget {
                 Text(
                   label,
                   style: AppTypography.labelSmall(
-                    color: AppColors.textTertiary(isDark),
-                  ),
+                    color: AppColors.textPrimary(isDark),
+                  ).copyWith(fontWeight: FontWeight.w600),
                 ),
+                const SizedBox(height: 4),
                 Text(
                   CurrencyFormatter.formatWithSign(amount),
-                  style: AppTypography.amountTiny(color: color),
+                  style: AppTypography.titleMedium(
+                    color: color,
+                  ).copyWith(fontWeight: FontWeight.bold),
                 ),
               ],
             ),
@@ -568,26 +570,33 @@ class _QuickAction extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: onTap,
-      child: Column(
-        children: [
-          Container(
-            width: 52,
-            height: 52,
-            decoration: BoxDecoration(
-              color: AppColors.surface(isDark),
-              shape: BoxShape.circle,
-              border: Border.all(color: AppColors.cardBorder(isDark)),
+      child: Container(
+        width: 76,
+        padding: const EdgeInsets.symmetric(vertical: 16),
+        decoration: BoxDecoration(
+          color: AppColors.surface(isDark),
+          borderRadius: BorderRadius.circular(24),
+        ),
+        child: Column(
+          children: [
+            Container(
+              width: 48,
+              height: 48,
+              decoration: BoxDecoration(
+                color: color.withOpacity(0.15),
+                shape: BoxShape.circle,
+              ),
+              child: Icon(icon, color: color, size: 24),
             ),
-            child: Icon(icon, color: color, size: 24),
-          ),
-          const SizedBox(height: AppSpacing.sm),
-          Text(
-            label,
-            style: AppTypography.labelSmall(
-              color: AppColors.textSecondary(isDark),
+            const SizedBox(height: 12),
+            Text(
+              label,
+              style: AppTypography.labelSmall(
+                color: AppColors.textPrimary(isDark),
+              ).copyWith(fontWeight: FontWeight.w600),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
@@ -600,6 +609,7 @@ class _SavingsPreviewCard extends StatelessWidget {
   final String progress;
   final int percent;
   final bool isDark;
+  final Color barColor;
 
   const _SavingsPreviewCard({
     required this.icon,
@@ -607,69 +617,65 @@ class _SavingsPreviewCard extends StatelessWidget {
     required this.progress,
     required this.percent,
     required this.isDark,
+    required this.barColor,
   });
 
   @override
   Widget build(BuildContext context) {
     return Container(
       width: 180,
-      padding: const EdgeInsets.all(AppSpacing.md),
+      padding: const EdgeInsets.all(20),
       decoration: BoxDecoration(
         color: AppColors.surface(isDark),
-        borderRadius: BorderRadius.circular(AppSpacing.radiusLg),
-        border: Border.all(color: AppColors.cardBorder(isDark)),
+        borderRadius: BorderRadius.circular(24),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Row(
-                children: [
-                  Icon(icon,
-                      color: AppColors.textSecondary(isDark), size: 18),
-                  const SizedBox(width: AppSpacing.sm),
-                  Flexible(
-                    child: Text(
-                      title,
-                      style: AppTypography.titleSmall(
-                        color: AppColors.textPrimary(isDark),
-                      ),
-                      overflow: TextOverflow.ellipsis,
-                    ),
-                  ),
-                ],
-              ),
               Container(
-                padding: const EdgeInsets.symmetric(
-                    horizontal: AppSpacing.sm, vertical: AppSpacing.xxs),
+                width: 44,
+                height: 44,
                 decoration: BoxDecoration(
-                  color: AppColors.secondary.withOpacity(0.15),
-                  borderRadius: BorderRadius.circular(AppSpacing.radiusFull),
+                  color: const Color(0xFFE5DCC5).withOpacity(0.5),
+                  borderRadius: BorderRadius.circular(16),
                 ),
-                child: Text(
-                  '$percent%',
-                  style: AppTypography.labelSmall(color: AppColors.secondary),
-                ),
+                child: Icon(icon, color: Colors.black87, size: 24),
+              ),
+              Text(
+                '$percent%',
+                style: AppTypography.labelMedium(
+                  color: const Color(0xFF004D40),
+                ).copyWith(fontWeight: FontWeight.w800),
               ),
             ],
           ),
+          const Spacer(),
+          Text(
+            title,
+            style: AppTypography.titleSmall(
+              color: AppColors.textPrimary(isDark),
+            ).copyWith(fontWeight: FontWeight.bold),
+            overflow: TextOverflow.ellipsis,
+          ),
+          const SizedBox(height: 4),
           Text(
             progress,
-            style: AppTypography.bodySmall(
-              color: AppColors.textTertiary(isDark),
-            ),
+            style: AppTypography.labelMedium(
+              color: AppColors.textSecondary(isDark),
+            ).copyWith(letterSpacing: 1.5, color: Colors.black54),
           ),
+          const SizedBox(height: 16),
           ClipRRect(
             borderRadius: BorderRadius.circular(AppSpacing.radiusFull),
             child: LinearProgressIndicator(
               value: percent / 100,
-              backgroundColor: AppColors.surfaceVariant(isDark),
-              valueColor:
-                  const AlwaysStoppedAnimation<Color>(AppColors.secondary),
-              minHeight: 6,
+              backgroundColor: const Color(0xFFE0E0E0),
+              valueColor: AlwaysStoppedAnimation<Color>(barColor),
+              minHeight: 8,
             ),
           ),
         ],
