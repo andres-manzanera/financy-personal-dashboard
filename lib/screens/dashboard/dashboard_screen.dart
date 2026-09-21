@@ -501,7 +501,7 @@ class _SummaryChip extends StatelessWidget {
     final color = isPositive ? AppColors.success : AppColors.error;
 
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 20),
+      padding: const EdgeInsets.all(12),
       decoration: BoxDecoration(
         color: AppColors.surface(isDark),
         borderRadius: BorderRadius.circular(24),
@@ -513,7 +513,7 @@ class _SummaryChip extends StatelessWidget {
             height: 48,
             decoration: BoxDecoration(
               color: color.withOpacity(0.15),
-              shape: BoxShape.circle,
+              borderRadius: BorderRadius.circular(12),
             ),
             child: Icon(
               isPositive
@@ -537,9 +537,11 @@ class _SummaryChip extends StatelessWidget {
                 const SizedBox(height: 4),
                 Text(
                   CurrencyFormatter.formatWithSign(amount),
-                  style: AppTypography.titleMedium(
+                  style: TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.w600,
                     color: color,
-                  ).copyWith(fontWeight: FontWeight.bold),
+                  ),
                 ),
               ],
             ),
